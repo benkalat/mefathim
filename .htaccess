@@ -1,0 +1,8 @@
+DirectoryIndex start.py
+
+
+AddHandler cgi-script .py
+
+RewriteCond %{HTTP_HOST} ^(www\.)?mefathim\.com$
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
