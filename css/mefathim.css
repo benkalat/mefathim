@@ -1,0 +1,218 @@
+
+
+body {
+    background-image: url(../img/back.jpg);
+    background-position: center;
+    background-size: cover;
+    font-family: 'Varela Round', sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+    position: relative;
+    font-size: 60px;
+    color: rgb(4, 111, 153);
+    font-family: 'Varela Round', sans-serif;
+}
+
+p {
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+}
+
+a {
+    cursor: pointer;
+    font-family: 'Varela Round', sans-serif;
+}
+
+div {
+    margin-top: auto;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-family: 'Varela Round', sans-serif;
+    
+}
+
+input[type=color] {
+    width: 10%;
+    padding: 1px 1px;
+    
+}
+
+input[type=date] {
+    width: 70%;
+    margin-right: 10px;
+}
+
+input[type=submit] {
+    margin-right: 10px;
+    background-color: rgb(36, 137, 196);
+    color: white;
+}
+
+input[required]::placeholder {
+    color: red;
+}
+
+button {
+    width: 100%;
+    padding: 12px 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-family: 'Varela Round', sans-serif;
+    color:white;
+    background-color: rgb(41, 166, 216);
+}
+button[type=submit] {
+    margin: 1px 2px;
+    
+}
+
+button[type=reset] {
+    width: 22%;
+    background-color: tomato;
+}
+
+nav {
+    direction: ltr;
+    position: sticky;
+    top: 0;
+}
+
+#nav-bar {
+    position: relative;
+}
+
+#logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 150px;
+    width: 450px;
+}
+
+#profile {
+    
+    max-width: 200px;
+    border-radius: 6px;
+    text-align: center;
+    padding: 8px 10px;
+    background-color: rgba(223, 223, 223, 0.719);
+}
+
+#face {
+    height: 70px;
+    width: 70px;
+}
+
+/* #now_logged {
+    position: absolute;
+} */
+.err {
+    color: #FF0000;
+}
+
+#short_btn {
+    width: 75%;
+}
+
+.container {
+    padding: 100px;
+}
+
+.forms {
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align: center;
+    
+}
+
+.posts {
+    margin-top: 50px;
+}
+
+.btn-link {
+    
+    text-decoration: none;
+    border: 1px solid rgb(50, 88, 194);
+    padding: 5px 8px;
+    
+}
+
+.cancel {
+    background-color: rgb(247, 68, 14);
+    width: 22%;
+}
+
+.new_post {
+    height: 200px;
+    width: 100%;
+    background-color: #c7f3f7;
+    color: #2055d0;
+}
+
+.show_posts {
+    white-space: pre-line;
+}
+/* .users {
+    position: absolute;
+} */
+@media screen and (max-width: 1200px) {
+    .forms {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+    .container {
+        padding: 80px;
+    }
+  }
+
+
+@media screen and (max-width: 900px) {
+    .forms {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .container {
+        padding: 80px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .forms {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .container {
+        padding: 30px;
+    }
+    #logo {
+        
+        height: 80px;
+        width: 250px;
+    }
+  }
+@media screen and (max-width: 300px) {
+    .forms {
+        margin-left: 5%;
+        margin-right: 5%;
+
+    }
+    .container {
+        padding: 10px;
+    }
+    #logo {
+        
+        height: 50px;
+        width: 150px;
+    }
+}

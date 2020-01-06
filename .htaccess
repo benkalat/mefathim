@@ -1,4 +1,4 @@
-DirectoryIndex start.py
+DirectoryIndex scripts/start.py
 
 
 AddHandler cgi-script .py

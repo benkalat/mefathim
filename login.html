@@ -1,45 +1,56 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/login.css">
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-        
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+        <link rel="stylesheet" href="css/mefathim.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>דף כניסה</title>
     </head>
-    <body dir="rtl">
-        <h1>ברוכים הבאים למפתחים</h1>
-        <div class="forms">
-            <div id="status"></div>
-            <form action="scripts/check_login.py" method="POST">
-                <div id="inputfields">
-                    <input type="email" name="email" placeholder="מה חשבון האימייל שלך?" required>
-                    <input type="password" name="password" placeholder="מה הסיסמא שלך?" required>
-                    <button type="submit">שלח</button>
-                    <button type="reset">נקה</button><br>
-                    <a href="forget.html">שכחתי סיסמא</a>
-                    <a href="sign_up.html">אין לך חשבון? הרשם עכשיו!</a>
-                </div>
-            </form>
-            
+    <body dir="rtl" onload="check_params()">
+        <div id="nav-bar">
+            <a href="login.html"><img src="img/logo.png" id="logo"></a>
         </div>
-        <a href="http://www.mefathim.co.il/" ><div>רצית להגיע לאתר מפתחים?  לחץ כאן</div><br><img src="img/mefathim.jpg" id="icon"></a>
-
+        <div class="container">
+            <h1>ברוכים הבאים למפתחים</h1>
+            <div id="title"></div>
+            <div class="forms">
+                
+                <form action="scripts/check_login.py" method="POST">
+                    
+                        <input type="email" id="email" name="email" placeholder="הכנס אימייל" required><br>
+                        <input type="password" id="password" name="password" placeholder="סיסמה" required>
+                        <div id="err"></div>
+                        <button type="submit" id="short_btn">שלח</button>
+                        <button type="reset">נקה</button><br>
+                        <div style="margin-top: 50px;margin-bottom: 50px;">
+                            <a class="btn-link" href = "forget_password.html">שכחתי סיסמה</a><br><br>
+                            <a class="btn-link" href="sign_up.html">אין לך חשבון? הרשם עכשיו!</a class="btn-link">
+                        </div>
+                    </form>
+                <div>לאתר מפתחים  <a href="http://www.mefathim.co.il/" >לחץ כאן</a></div>    
+            
+            </div>
+        </div>
+        
+        
+        <script>
+            
+            
+            function check_params(){
+                var url_string = window.location.href;
+                var url = new URL(url_string);
+                if (url.searchParams.get("err") == "1"){
+                    document.getElementById('err').innerHTML = "אחד הנתונים שגוי!";
+                }
+                if (url.searchParams.get("msg") == "0"){
+                    document.getElementById('err').innerHTML = "הסיסמא שונתה כעת ניתן להיכנס!";
+                    document.getElementById('email').value = url.searchParams.get("email");
+                }
+                if(url.searchParams.get("msg") == "2"){
+                    document.getElementById('email').value = url.searchParams.get("email");
+                    document.getElementById('err').innerHTML = "נרשמת בהצלחה! הזן סיסמא לכניסה!";
+                }
+            }
+        </script>
     </body>
-    <script>
-
-        let url = new URL(document.location);
-        let parems = url.searchParams;
-        let status_key = parems.has("err");
-        if(status_key){
-            let status_val = parems.get("err");
-            if(status_val == 1)
-                document.getElementById("status").innerHTML="אחד או יותר מהפרטים שהוזנו שגויים";
-        }
-
-    </script>
-    <style>
-        #status{
-            color: red;
-        }
-    
-    </style>
 </html>

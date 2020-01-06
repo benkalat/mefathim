@@ -1,10 +1,14 @@
-#! /home/mefath5/.local/bin/python3
-print("Content-Type: text/plain\n")
+#!/home/mefath5/.local/bin/python3
 
-
-import sys
 import json
-import mysql.connector
+import sys
+import codecs
+import functions
+
+print("Content-Type: text/plain\n\n")
+
+# Note this line. It's the important one
+sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 
 try:
@@ -12,18 +16,15 @@ try:
     data = json.load(sys.stdin)
     email = data["email"]
 
-    connection = mysql.connector.connect(host='localhost',
-                                         database='mefath5_mefathim',
-                                         user='mefath5_dev',
-                                         password='dev12345')
+    connection = functions.connect()
 
-    sql_select_quary = "SELECT * FROM `users` WHERE `email` LIKE '{}'".format(email)
+    sql_select = "SELECT * FROM `users` WHERE `email` LIKE '" + email + "'"
     cursor = connection.cursor()
-    cursor.execute(sql_select_quary)
+    cursor.execute(sql_select)
     records = cursor.fetchall()
-    
+
     if records:
-        print("this email already exsist")
+        print("האימייל הזה כבר קיים")
     else:
         pass
 except json.JSONDecodeError as exc:

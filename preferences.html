@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/mefathim.css">
+        <!-- <script src="js/navbar.js"></script> -->
+        <title></title>
+    </head>
+    <body dir="rtl" onload="check_params()">
+
+        <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
+        <script src="js/load.js"></script>
+
+        <h1>העדפות</h1>
+        <p id="err"></p>
+        <div class="forms">
+            <form action="scripts/preferences.py" method="post">
+                <!-- <input type="email" id="email" placeholder="הכנס אימייל*" name="email" required><br> -->
+                <div id="result">
+                </div>
+                <input type="text" placeholder="שינוי שם פרטי" name="first_name" required><br>
+                <input type="text" placeholder=" שינוי שם אמצעי" name="middle_name"><br>
+                <input type="text" placeholder=" שינוי שם משפחה" name="last_name"><br>
+                <input type="text" placeholder=" כינוי חדש" name="nick_name"><br>
+                <select name="gender">
+                    <option value="1">זכר</option>
+                    <option value="2">נקבה</option>
+                    <option value="3">אחר</option>
+                </select><br>
+                <input type="date" placeholder="תאריך לידה" name="birth_date" value=""><br>
+                <input type="text" placeholder="עיר" name="city"><br>
+                <input type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country"><br>
+                <input type="text" placeholder="טלפון" name="phone"><br>
+                <button type="submit" id="short_btn">בצע שינויים</button>
+                <button type="reset" onclick="redirection()">בטל</button>
+                   
+            </form>            
+        </div>
+    </div>
+    <p>גירסה:0.007</p>
+        <script>
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    data_from_json = JSON.parse(this.responseText);
+                    if(data_from_json.ok == true){
+                        document.getElementsByName("first_name")[0].value = data_from_json.data.first_name;
+                        document.getElementsByName("middle_name")[0].value = data_from_json.data.middle_name;
+                        document.getElementsByName("last_name")[0].value = data_from_json.data.last_name;
+                        document.getElementsByName("nick_name")[0].value = data_from_json.data.nickname;
+                        document.getElementsByName("gender")[0].value = data_from_json.data.gender;
+                        document.getElementsByName("birth_date")[0].value = data_from_json.data.date_of_birth;
+                        document.getElementsByName("city")[0].value = data_from_json.data.city;
+                        document.getElementsByName("country")[0].value = data_from_json.data.country;
+                        document.getElementsByName("phone")[0].value = data_from_json.data.phone_number;
+                    }
+                    else{
+                        window.location = "login.html";
+                    }
+                }
+            }
+            xmlhttp.open("POST", "scripts/user_data.py", true);
+            xmlhttp.send();
+
+            function redirection(){
+                window.location = "home_page.html"
+            }
+
+            function check_params(){
+                var url_string = window.location.href;
+                var url = new URL(url_string);
+                if (url.searchParams.get("msg") == "1"){
+                    document.getElementById('err').innerHTML = "השינוי בוצע בהצלחה!!";
+                }
+            }
+            buildnavbar();
+        </script>
+    </body>
+</html>

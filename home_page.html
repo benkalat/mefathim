@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+        <link rel="stylesheet" href="css/mefathim.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="js/load.js"></script>
+        <title>דף הבית</title>
+    </head>
+    <body dir="rtl">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <a class="navbar-brand" href="home_page.html">
+              <img src="img/logo.png" alt="logo" id="logo" style="width:400px;height: 120px;">
+            </a>
+            
+            
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="scripts/logged_out.py">יציאה</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="preferences.html">העדפות</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+              </li>
+            </ul>
+
+            <div id="profile">
+                <img src="img/face.png" id="face">
+                <div id="user" class="title"></div>
+            </div>
+            
+        </nav>
+        
+        <h1>ברוכים הבאים לאתר מפתחים!</h1>
+        <h2>כרגע באתר</h2>
+        <div id="now_logged"></div>
+        
+        <p> גירסה:0.007 &copy;</p>
+        <script>
+            $(document).ready(function(){
+                $.get("scripts/user_data.py", function(result){
+                    var user_data = JSON.parse(result);
+                    var data = user_data.data.nickname + "<br>" + user_data.data.email;
+                    $("#user").html(data);
+                });
+            });
+
+            function users_get(){
+              $.get("scripts/users_get.py", function(result){
+                    var users = JSON.parse(result);
+                    var faces = "";
+                    for (x in users.data) {
+                        sel = users.data[x];
+                        faces += "<div class='users'><img src='img/face.png' style='width: 50px;' class='users_face'>"+ sel.nickname +"</div>";
+                    
+                    }
+                    $("#now_logged").html(faces);
+                });
+            }
+
+            if (connect) {
+              users_get();
+            }
+        </script>
+    </body>
+    </html>
