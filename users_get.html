@@ -1,44 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
-    <body dir="rtl">
-        <h1>טבלת המשתמשים</h1>
+    <body dir="rtl" style="font-family: 'Alef', sans-serif;">
+        <h1>כרגע באתר</h1>
         <div id="demo"></div>
+
+        
+        <script>
+            
+            $(document).ready(function(){
+                
+                $.get("scripts/users_get.py", function(result){
+                    var users = JSON.parse(result);
+                    
+                    var faces = "";
+                    for (x in users) {
+                        sel = users[x];
+                        faces += "<div class='users'><img src='img/face.png' style='width: 50px;' class='users_face'>"+ sel.first_name +"<br>"+ sel.email +"</div>"
+                        $("#demo").html(faces);
+                    }
+
+                });
+            });
+                
+           
+        </script>
     </body>
-    <script>
-        $.get('scripts/users_get.py', function (data) {
-            
-            myObj = JSON.parse(data);
-            columens = ['id', 'email', 'first_name', 'middle_name', 'last_name', 'status', 'nickname', 'password_hash', 'salt', 'creation_date', 'gender', 'date_of_birth', 'city', 'country', 'phone_number']
-            
-            txt = "<table border='1'><tr>"
-            for (i in columens){
-                txt += "<th>" + columens[i] + "</th>";
-            }
-            txt += "</tr>";
-            for (x in myObj) {
-                txt += "<tr><td>" + myObj[x].id + "</td>";
-                txt += "<td>" + myObj[x].email + "</td>";
-                txt += "<td>" + myObj[x].first_name + "</td>";
-                txt += "<td>" + myObj[x].middle_name + "</td>";
-                txt += "<td>" + myObj[x].last_name + "</td>";
-                txt += "<td>" + myObj[x].status + "</td>";
-                txt += "<td>" + myObj[x].nickname + "</td>";
-                txt += "<td>" + myObj[x].password_hash + "</td>";
-                txt += "<td>" + myObj[x].salt + "</td>";
-                txt += "<td>" + myObj[x].creation_date + "</td>";
-                txt += "<td>" + myObj[x].gender + "</td>";
-                txt += "<td>" + myObj[x].date_of_birth + "</td>";
-                txt += "<td>" + myObj[x].city + "</td>";
-                txt += "<td>" + myObj[x].country + "</td>";
-                txt += "<td>" + myObj[x].phone_number + "</td>";
-            }
-            txt += "</table>"    
-            $( "#demo" ).html( txt );
-        });
-    </script>
 </html>

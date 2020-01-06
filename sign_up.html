@@ -1,77 +1,58 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/sign_up.css">
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+        <link rel="stylesheet" href="css/mefathim.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $("#email").change(function(){
-                    $("#out_json").remove();
-
-                    let email = $("#email").val();
-
-                    let xhr = new XMLHttpRequest();
-                    let url = "scripts/check_email.py";
-
-                    xhr.open("POST", url, true);
-
-                    xhr.setRequestHeader("Content-Type", "application/json"); 
-
-                    xhr.onreadystatechange = function () { 
-                        if (xhr.readyState === 4 && xhr.status === 200) { 
-                            // Print received data from server just if something is returned
-                            // It should be greater than 2 because a value of minimum 2 is always returned
-                            if(this.responseText.length > 2){
-                                $("#email").after("<p id='out_json'>"+this.responseText+"</p>");
-                            }        
-                        } 
-                    };
-                    
-                    var data = JSON.stringify({ "email": email }); 
-
-                    // Sending data with the request 
-                    xhr.send(data); 
-                });
-
-                $("#pass_again").change(function(){
-
-                    $("#pass_out").remove();
-
-                    original_pass = $("#pass").val();
-                    again_pass = $("#pass_again").val();
-
-                    if(original_pass != again_pass){
-                        $("#pass_again").after("<p id='pass_out'>הסימא אינה תואמת</p>");
-                    }
-                });
-            });
-        </script>
     </head>
-
-<body>
-
-<div class="forms">
-    <h2>דף הרשמה למפתחים</h2>
-    <form action="scripts/sign_up.py" method="post">
-        <input type="email" id="email" placeholder="הכנס אימייל" name="email" required><br>
-        <input type="text" placeholder="שם" name="first_name"><br>
-        <input type="text" placeholder="שם נוסף" name="middle_name"><br>
-        <input type="text" placeholder="שם משפחה" name="last_name"><br>
-        <input type="text" placeholder="כינוי" name="nick_name" required><br>
-        <select name="gender">
-            <option value="1">זכר</option>
-            <option value="2">נקבה</option>
-        </select><br>
-        <input type="password" placeholder="סיסמה: בין 8-16 תווים" id="pass" name="password" pattern=".{8, 16}" required><br>
-        <input type="password" placeholder="הקלד סיסמה שוב" id="pass_again" name="password_again" pattern=".{8, 16}" required><br>
-        <input type="date" placeholder="תאריך לידה" name="birth_date" required><br>
-        <input type="text" placeholder="עיר" name="city"><br>
-        <input type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country"><br>
-        <input type="text" placeholder="טלפון" name="phone"><br>
-        <button type="submit">הרשם</button>
-    </form>            
-</div>
-</body>
+    <body dir="rtl" onload="check_params()">
+        <div id="nav-bar">
+            <a href="login.html"><img src="img/logo.png" id="logo"></a>
+        </div>
+        <div class="container">
+            <h2>דף הרשמה למפתחים</h2>
+            <div class="forms">
+                <form action="scripts/sign_up.py" method="post">
+                    <input type="email" id="email" placeholder="הכנס אימייל*" name="email" required><br>
+                    <div id="result">
+                    </div>
+                    <input type="text" placeholder="שם פרטי*" name="first_name" required><br>
+                    <input type="text" placeholder="שם משפחה" name="last_name"><br>
+                    <input type="text" placeholder="כינוי" name="nick_name"><br>
+                    <select name="gender">
+                        <option value="1">זכר</option>
+                        <option value="2">נקבה</option>
+                        <option value="3">אחר</option>
+                    </select><br>
+                    <input type="password" placeholder="סיסמה: בין 8-16 תווים*" id="pass" name="password" pattern=".{8, 16}" required><br>
+                    <input type="password" placeholder="הקלד סיסמה שוב*" id="pass_again" name="password_again" pattern=".{8, 16}" required><br>
+                    <p class="err" id="err"></p>
+                    <for class="err">תאריך לידה*</for>
+                    <input type="date" placeholder="תאריך לידה" name="birth_date"><br>
+                    <input type="text" placeholder="עיר" name="city"><br>
+                    <input type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country"><br>
+                    <input type="text" placeholder="טלפון" name="phone"><br>
+                    <button type="submit">הרשם</button>
+                </form>            
+            </div>
+        </div>
+    </body>
+    <script>
+        $("#email").change(function(){
+            let email = $("#email").val();
+            $.post( "scripts/check_email.py", JSON.stringify({ "email": email }))
+            .done(function( data ) {
+                $("#result").html('<p class="err">'+data+'</p>')
+            });
+        });
+        function check_params(){
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            if (url.searchParams.get("err") == "1"){
+                document.getElementById('err').innerHTML = "הסיסמאות לא תואמות!";
+            }
+            document.getElementById('email').value = url.searchParams.get("msg")
+        }
+    </script>
 </html>

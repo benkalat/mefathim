@@ -1,43 +1,63 @@
 #!/home/mefath5/.local/bin/python3
 
-import mysql.connector
+import functions
 import json
 import os
 import sys
 import codecs
+import datetime
 
 # Note this line. It's the important one
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
-print("Content-Type: text/plain\n")
+print("Content-Type: text/plain; charset=UTF-8\n\n")
 
 try:
 
-    sql = "SELECT * FROM users"
+    db = functions.connect()
 
-    mydb = mysql.connector.connect(host="localhost",
-                                  user="mefath5_dev",
-                                  password="dev12345",
-                                  database="mefath5_mefathim")
+    time_before = (datetime.datetime.now() - datetime.timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
 
-    mycursor = mydb.cursor()
-    mycursor.execute(sql)
+    session_sql = "SELECT `uid` FROM `sessions` WHERE logged_out = 0 AND update_time >= '{}'".format(time_before)
+    cursor = db.cursor()
+    cursor.execute(session_sql)
 
-    all_details = mycursor.fetchall()
+    ids = cursor.fetchall()
 
-    list_of_columens = [i[0] for i in mycursor.description]
-    users = []
+    # clean the result and covert it to a tuple
+    new_ids = tuple([item[0] for item in ids])
 
-    for row in all_details:
-        user = {key: val for key, val in zip(list_of_columens, row)}
-        users.append(user)
+    checker = True
+    users_connected = []
 
-    print(json.dumps(users, indent=4, default=str, ensure_ascii=False).encode('utf-8').decode())
+    try:
+        # this condition is because if new_ids has just one element the sql query syntax where id iin cant work
+        if len(new_ids) > 1:
+            sql = "SELECT nickname FROM users WHERE id in {}".format(new_ids)
+        else:
+            sql = "SELECT nickname FROM users WHERE id LIKE {}".format(new_ids[0])
+        mydb = functions.connect()
+
+        mycursor = mydb.cursor()
+        mycursor.execute(sql)
+
+        all_details = mycursor.fetchall()
+        list_of_columens = [i[0] for i in mycursor.description]
+
+        for row in all_details:
+            user = {key: val for key, val in zip(list_of_columens, row)}
+            users_connected.append(user)
+
+    except:
+        checker = False
+    json_res = {"ok": checker, "data": users_connected}
+    print(json.dumps(json_res, indent=4, default=str, ensure_ascii=False).encode('utf-8').decode())
 
 except Exception as e:
-	exc_type, exc_obj, exc_tb = sys.exc_info()
-	fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-	print(exc_type, fname, exc_tb.tb_lineno)
+    print(e)
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)
 
 
 
