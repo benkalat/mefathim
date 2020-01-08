@@ -27,6 +27,8 @@ try:
 
     if time > time_before and logged == 0:
 
+        functions.update_connection(sid)
+
         details_user_dict = {}
 
         form = cgi.FieldStorage()
