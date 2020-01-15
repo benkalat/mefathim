@@ -1,4 +1,3 @@
-
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -37,6 +36,10 @@ function buildnavbar(){
             window.location.href = "login.html";
         }
         user_id = user_data.data.id;
+        picture_number = user_data.data.picture_number;
+        if (picture_number == ""){
+            picture_number = "22";
+        }
         objects[0]=user_data["data"]["nickname"];
         f();
     });
@@ -65,7 +68,7 @@ function buildnavbar(){
 
         profile+="</div></li>"
 
-        face="<div id='profile'><img src='img/face.png'id='face'><div id='user'class='title'></div>";
+        face="<div id='profile'><img src='img/avatars/"+picture_number+".png'id='face'><div id='user'class='title'></div>";
 
         navbar+=profile+face;
     
@@ -87,10 +90,14 @@ function get_connected_users(){
             var faces = "<div class='.container float-right'><ul class='list-group'><li class='list-group-item users' style='text-align: center'>כרגע באתר</li>";
             for (x in users.data) {
                 sel = users.data[x];
+                img_num = sel.picture_number;
+                if (img_num == null){
+                    img_num = "22";
+                }
                 if (sel.id == user_id) {
                     continue;
                 } else {
-                    faces += "<li class='list-group-item users'><div class='float-right'>"+ sel.nickname +"</div><div class='float-left'><img src='img/face.png' style='width: 50px;' class='users_face'></div></li>";
+                    faces += "<li class='list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ sel.nickname +"</div><div class='float-left'><img src='img/avatars/"+img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
                 }
             }
             faces += "</ul></div>"

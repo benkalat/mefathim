@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/mefathim.css">
+        <!-- <script src="js/navbar.js"></script> -->
+        <script src="js/load.js"></script>
+        <style>
+            table{
+                text-align: center;
+            }
+            td, tr{
+                width: auto;
+            }
+            img{
+                width:auto;
+                height: 20%;
+                border-radius: 50%;
+            }
+            .images:hover {
+                cursor: pointer;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.274), 0 6px 20px 0 rgba(0, 0, 0, 0.13);
+                transition: 0.3s;
+            }
+            #current_img {
+                width: 30%;
+            }
+            #current {
+                display: flex;
+                overflow: hidden;
+                width: 30%;
+                margin-left: 200px;
+            }
+            #p1 {
+                float: right; 
+                margin: 60px;
+                margin-left: 10px;
+                font-size: x-large;
+            }
+            #msg {
+                font-size: x-large;
+                margin-left: 200px;
+                height: 30px;
+            }
+        </style>
+        <title>בחירת תמונה</title>
+    </head>
+    <body dir="rtl">
+        <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
+        <div id="now_logged" style="padding-top: 50px;"></div>
+        <center>
+            <div id="msg"></div>
+            <div id="current"><p id="p1">התמונה שלך כרגע:</p><div id="current_img"></div></div>
+        <div id="imgs" class="card card-container img">
+            <p style="font-size: large;">בחר תמונה</p>
+            <table id="table_av">
+                <tr><td><img class="images" alt="1" onclick="choose_picture(this.alt)" src="img/avatars/1.png"></td><td><img class="images" alt="2" onclick="choose_picture(this.alt)" src="img/avatars/2.png"></td><td><img class="images" alt="3" onclick="choose_picture(this.alt)" src="img/avatars/3.png"></td><td><img class="images" alt="4" onclick="choose_picture(this.alt)" src="img/avatars/4.png"></td></tr>
+                <tr><td><img class="images" alt="5" onclick="choose_picture(this.alt)" src="img/avatars/5.png"></td><td><img class="images" alt="6" onclick="choose_picture(this.alt)" src="img/avatars/6.png"></td><td><img class="images" alt="7" onclick="choose_picture(this.alt)" src="img/avatars/7.png"></td><td><img class="images" alt="8" onclick="choose_picture(this.alt)" src="img/avatars/8.png"></td></tr>
+                <tr><td><img class="images" alt="9" onclick="choose_picture(this.alt)" src="img/avatars/9.png"></td><td><img class="images" alt="10" onclick="choose_picture(this.alt)" src="img/avatars/10.png"></td><td><img class="images" alt="11" onclick="choose_picture(this.alt)" src="img/avatars/11.png"></td><td><img class="images" alt="12" onclick="choose_picture(this.alt)" src="img/avatars/12.png"></td></tr>
+            </table>
+        </center>
+        </div>
+
+        <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+            if(this.readyState == 4){
+                data_from_json = JSON.parse(this.responseText);
+                if(data_from_json.ok == true){
+                    var img_num = String(data_from_json.data.picture_number);
+                    
+                    if(img_num == ""){
+                        img = "<img style='height:100%; width:100%;'src="+"img/avatars/22.png"+">"
+                        document.getElementById("current_img").innerHTML = img;
+                    }
+                    else{
+                        var img = "<img style='height:100%; width:100%;'src="+"img/avatars/";
+                        img += img_num+ ".png"+">";
+                        document.getElementById("current_img").innerHTML = img;
+                    }
+                    
+                }
+                else{
+                    window.location = "login.html";
+                }
+            }
+        }
+        xmlhttp.open("POST", "scripts/user_data.py", true);
+        xmlhttp.send();
+        
+        function choose_picture(alt){
+            data = {num_picture : alt};
+            data_to_json = JSON.stringify(data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    data_from_json = JSON.parse(this.responseText);
+                    if(data_from_json.data["sucsses"]){
+                        var img = "<img style='height:100%; width:100%;'src="+"img/avatars/";
+                        img += alt + ".png"+">";
+                        document.getElementById("current_img").innerHTML = img;
+                        document.getElementById("msg").innerHTML = "התמונה שלך שונתה בהצלחה!!"
+                    }
+
+                }
+            }
+            xmlhttp.open("POST", "scripts/select_avatar.py", true);
+            xmlhttp.send(data_to_json);
+        }
+
+        buildnavbar();
+        get_connected_users();
+        setInterval(function(){ get_connected_users() }, 3000);
+
+        </script>
+
+    </body>
+    </html>

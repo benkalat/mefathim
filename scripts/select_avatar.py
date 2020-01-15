@@ -31,20 +31,15 @@ try:
     if time > time_before and logged == 0:
 
         functions.update_connection(db, sid)
-
-        data_sql = "SELECT `id`, `email`, `first_name`, `middle_name`, `last_name`, `nickname`, `gender`, `date_of_birth`, `city`, `country`, `phone_number`, picture_number FROM `users` WHERE id = '" + str(uid) + "'"
+        data = json.load(sys.stdin)
+        img_num = data["num_picture"]
+        # print(img_num)
+        data_sql = "UPDATE `users` SET `picture_number` = '"+img_num+"' WHERE id = '" + str(uid) + "'"
 
         mycursor = db.cursor()
         mycursor.execute(data_sql)
-        data = mycursor.fetchall()
-
-        list_of_columens = [i[0] for i in mycursor.description]
-        for row in data:
-            user = {key: val for key, val in zip(list_of_columens, row)}
-
-        for x in user:
-            if user[x] == None:
-                user[x] = ""
+        db.commit()
+        user["sucsses"] = img_num
 
     else:
         checker = False
@@ -56,3 +51,5 @@ except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     print(exc_type, fname, exc_tb.tb_lineno)
+
+

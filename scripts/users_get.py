@@ -41,7 +41,7 @@ try:
 
         time_before = (datetime.datetime.now() - datetime.timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
 
-        sql = "SELECT id, nickname FROM users, sessions WHERE users.id = sessions.uid AND logged_out = 0 AND update_time >= '" + time_before + "'"
+        sql = "SELECT id, nickname, picture_number FROM users, sessions WHERE users.id = sessions.uid AND logged_out = 0 AND update_time >= '" + time_before + "'"
         mycursor.execute(sql)
         all_details = mycursor.fetchall()
 
