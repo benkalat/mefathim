@@ -21,19 +21,16 @@
         <title>שינוי העדפות</title>
     </head>
     <body dir="rtl" onload="check_params()"></body>
-    
-        
         <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
         <div id="now_logged" style="padding-top: 50px;"></div>
 
-            
             <div class="card card-container sign_up" style="text-align: right;">
                 <h3>העדפות</h3>
                 <p id="ok"></p>
 
                 <div id="result">
                 </div>
-
+                <a href="avatars.html">שנה תמונה</a>
                 <form action="scripts/preferences.py" method="post">
 
                     <div class="form-row">
@@ -122,10 +119,6 @@
                     }
                 }
             }
-
-
-
-
             xmlhttp.open("POST", "scripts/user_data.py", true);
             xmlhttp.send();
 
