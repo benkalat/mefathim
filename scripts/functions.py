@@ -5,6 +5,7 @@ import os
 import string
 import hashlib
 import random
+import datetime
 
 
 def get_cookie_value(key):
@@ -23,11 +24,23 @@ def get_cookie_value(key):
 
 
 def connect():
-    db = mysql.connector.connect(host="localhost",
+    db = mysql.connector.connect(host="127.0.0.1",
                                  user="mefath5_dev",
                                  password="dev12345",
                                  database="mefath5_mefathim")
     return db
+
+
+def update_connection(connection, sid):
+    update_time = datetime.datetime.now()
+    update_time = str(update_time)
+
+    sql = "UPDATE `sessions` SET `update_time`='" + update_time + "' WHERE sid = '" + sid + "'"
+
+    session_cursor = connection.cursor()
+    session_cursor.execute(sql)
+
+    connection.commit()
 
 
 # From https://stackoverflow.com/posts/19213271/revisions

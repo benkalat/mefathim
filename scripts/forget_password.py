@@ -58,7 +58,7 @@ try:
             server.login(sent_from, gmail_app_password)
             server.sendmail(sent_from, sent_to, email_text.encode('UTF-8'))
             server.close()
-            print("location: ../change_password.html?msg={}".format(sent_to))
+            print("location: ../login.html?msg=0&email={}".format(sent_to))
             print("")
 
         except BaseException as e:

@@ -52,6 +52,7 @@ try:
         try:
             mycursor.execute(sql)
             mydb.commit()
+
             # All is OK, return "password changed" msg.
             print("location: ../login.html?msg=0&email="+e_mail)
             print("")

@@ -1,58 +1,81 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
-        <link rel="stylesheet" href="css/mefathim.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    </head>
-    <body dir="rtl" onload="check_params()">
-        <div id="nav-bar">
-            <a href="login.html"><img src="img/logo.png" id="logo"></a>
-        </div>
-        <div class="container">
-            <h2>דף הרשמה למפתחים</h2>
-            <div class="forms">
-                <form action="scripts/sign_up.py" method="post">
-                    <input type="email" id="email" placeholder="הכנס אימייל*" name="email" required><br>
-                    <div id="result">
-                    </div>
-                    <input type="text" placeholder="שם פרטי*" name="first_name" required><br>
-                    <input type="text" placeholder="שם משפחה" name="last_name"><br>
-                    <input type="text" placeholder="כינוי" name="nick_name"><br>
-                    <select name="gender">
-                        <option value="1">זכר</option>
-                        <option value="2">נקבה</option>
-                        <option value="3">אחר</option>
-                    </select><br>
-                    <input type="password" placeholder="סיסמה: בין 8-16 תווים*" id="pass" name="password" pattern=".{8, 16}" required><br>
-                    <input type="password" placeholder="הקלד סיסמה שוב*" id="pass_again" name="password_again" pattern=".{8, 16}" required><br>
-                    <p class="err" id="err"></p>
-                    <for class="err">תאריך לידה*</for>
-                    <input type="date" placeholder="תאריך לידה" name="birth_date"><br>
-                    <input type="text" placeholder="עיר" name="city"><br>
-                    <input type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country"><br>
-                    <input type="text" placeholder="טלפון" name="phone"><br>
-                    <button type="submit">הרשם</button>
-                </form>            
-            </div>
-        </div>
-    </body>
-    <script>
-        $("#email").change(function(){
-            let email = $("#email").val();
-            $.post( "scripts/check_email.py", JSON.stringify({ "email": email }))
-            .done(function( data ) {
-                $("#result").html('<p class="err">'+data+'</p>')
-            });
-        });
-        function check_params(){
-            var url_string = window.location.href;
-            var url = new URL(url_string);
-            if (url.searchParams.get("err") == "1"){
-                document.getElementById('err').innerHTML = "הסיסמאות לא תואמות!";
-            }
-            document.getElementById('email').value = url.searchParams.get("msg")
-        }
-    </script>
+  <head>
+      <meta charset="UTF-8" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+      <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="css/mefathim.css">
+  </head>
+  <body dir="rtl" onload="check_params()">
+    <div class="container">
+      <h2 style="margin-top: 100px;">הצטרפו למשפחת מפתחים</h2 style="margin-top: 100px;">
+      <a href="login.html"><img src="img/logo.png" id="logo"></a>
+      <div class="card card-container sign_up">
+        <p>מלא את שדות החובה המסומנים בכוכבית!</p>
+        <form action="scripts/sign_up.py" method="post">
+          <div class="form-row">
+            <input type="email" id="email" placeholder="הכנס אימייל *" name="email" required>
+          </div>
+          <div id="result"></div>
+          <div class="form-row">
+            <input class="col-md-4 mb-3" type="text" placeholder="שם פרטי *" name="first_name" required>
+            <input class="col-md-8 mb-3" type="text" placeholder="שם משפחה" name="last_name">
+            
+          </div>
+          <div class="form-row">
+            <input class="col-md-6 mb-3" type="text" placeholder="כינוי" name="nick_name">
+            <select class="col-md-6 mb-3" name="gender">
+              <option value="1">זכר</option>
+              <option value="2">נקבה</option>
+              <option value="3">אחר</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input class="col-md-6 mb-3" type="password" placeholder="סיסמה: בין 8-16 תווים *" id="pass" name="password" pattern=".{8, 16}" required>
+            <input class="col-md-6 mb-3" type="password" placeholder="הקלד סיסמה שוב *" id="pass_again" name="password_again" pattern=".{8, 16}" required>
+          </div>
+          <p class="err" id="err"></p>
+          <div class="form-row">
+            <!-- <for class="err">תאריך לידה*</for> -->
+            <label for="pwd" class="col-4">תאריך לידה * </label>
+            <input class="col-8" type="date" placeholder="תאריך לידה" name="birth_date">
+          </div>
+          <div class="form-row">
+            <input class="col-6" type="text" placeholder="עיר" name="city">
+            <input class="col-6" type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country">
+          </div>
+          <div class="form-row">
+            <input type="text" placeholder="טלפון" name="phone">
+          </div>
+          <div class="form-row">
+            <label for="invalidCheck2">אני מסכים לתנאים וההגבלות *</label>
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+          </div>
+          <button type="submit">הרשם</button>
+        </form>            
+      </div>
+    </div>
+    
+  </body>
+  <script>
+      $("#email").change(function(){
+          let email = $("#email").val();
+          $.post( "scripts/check_email.py", JSON.stringify({ "email": email }))
+          .done(function( data ) {
+              $("#result").html('<p class="err">'+data+'</p>')
+          });
+      });
+      function check_params(){
+          var url_string = window.location.href;
+          var url = new URL(url_string);
+          if (url.searchParams.get("err") == "1"){
+              document.getElementById('err').innerHTML = "הסיסמאות לא תואמות!";
+          }
+          document.getElementById('email').value = url.searchParams.get("msg")
+      }
+  </script>
 </html>

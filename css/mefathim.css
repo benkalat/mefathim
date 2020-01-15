@@ -5,6 +5,7 @@ body {
     background-position: center;
     background-size: cover;
     font-family: 'Varela Round', sans-serif;
+    
 }
 
 h1, h2 {
@@ -22,43 +23,48 @@ p {
 
 a {
     cursor: pointer;
+    color: rgb(4, 111, 153);
     font-family: 'Varela Round', sans-serif;
+}
+a:visited {
+    color: rgb(4, 111, 153);
 }
 
 div {
     margin-top: auto;
 }
 
-input, select {
+input {
     width: 100%;
-    padding: 12px 8px;
-    margin: 8px 0;
+    padding: 8px 8px;
+    margin: 5px 0;
     border-radius: 4px;
     border: 1px solid #ccc;
     background-color: white;
     font-family: 'Varela Round', sans-serif;
-    
+    font-size: 14px;
+}
+
+select {
+    width: 100%;
+    padding: 8px 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 14px;
 }
 
 input[type=color] {
-    width: 10%;
+    width: 20px;
     padding: 1px 1px;
     
-}
-
-input[type=date] {
-    width: 70%;
-    margin-right: 10px;
 }
 
 input[type=submit] {
     margin-right: 10px;
     background-color: rgb(36, 137, 196);
     color: white;
-}
-
-input[required]::placeholder {
-    color: red;
 }
 
 button {
@@ -78,8 +84,8 @@ button[type=submit] {
 }
 
 button[type=reset] {
-    width: 22%;
-    background-color: tomato;
+    height: 20%;
+    background-color: rgb(74, 143, 233);
 }
 
 nav {
@@ -92,20 +98,24 @@ nav {
     position: relative;
 }
 
+.nav-item {
+    margin: auto;
+}
+
 #logo {
     position: absolute;
     top: 0px;
     left: 0px;
-    height: 150px;
-    width: 450px;
+    height: 120px;
+    width: 400px;
 }
 
 #profile {
-    
+    height: 120px;
     max-width: 200px;
     border-radius: 6px;
     text-align: center;
-    padding: 8px 10px;
+    padding: 25px 10px;
     background-color: rgba(223, 223, 223, 0.719);
 }
 
@@ -114,10 +124,13 @@ nav {
     width: 70px;
 }
 
-/* #now_logged {
-    position: absolute;
-} */
-.err {
+#login_face {
+    height: 120px;
+    width: 120px;
+    
+}
+
+#err {
     color: #FF0000;
 }
 
@@ -125,7 +138,11 @@ nav {
     width: 75%;
 }
 
-.container {
+.short_btn {
+    width: 75%;
+}
+
+.mycontainer {
     padding: 100px;
 }
 
@@ -162,57 +179,111 @@ nav {
 
 .show_posts {
     white-space: pre-line;
+    font-family: 'Varela Round', sans-serif;
+    padding: 30px;
 }
-/* .users {
-    position: absolute;
-} */
-@media screen and (max-width: 1200px) {
+
+.card-container.card {
+    max-width: 350px;
+    padding: 30px 30px;
+    margin: 0 auto 25px;
+    margin-top: 10px;
+    align-items: center;
+    background-color: rgb(255, 255, 255, 0.2);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.sign_up.card-container.card {
+    max-width: 600px;
+}
+
+@media screen and (max-width: 1400px) {
+    h1, h2 {
+        font-size: 55px;
+    }
+    #logo {
+        height: 110px;
+        width: 380px;
+    }
     .forms {
         margin-left: 30%;
         margin-right: 30%;
     }
-    .container {
+    .mycontainer {
         padding: 80px;
     }
   }
 
+  @media screen and (max-width: 1100px) {
+    h1, h2 {
+        font-size: 50px;
+    }
+    #logo {
+        height: 100px;
+        width: 360px;
+    }
+    .forms {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+    .mycontainer {
+        padding: 80px;
+    }
+  }
 
 @media screen and (max-width: 900px) {
+    h1, h2 {
+        font-size: 40px;
+    }
+    #logo {
+        height: 90px;
+        width: 300px;
+        margin-left: 30%;
+    }
     .forms {
         margin-left: 20%;
         margin-right: 20%;
     }
-    .container {
+    .mycontainer {
         padding: 80px;
     }
 }
 
 @media screen and (max-width: 530px) {
+    
+    h1, h2 {
+        font-size: 35px;
+    }
+    #logo {
+        height: 80px;
+        width: 250px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
     .forms {
         margin-left: 10%;
         margin-right: 10%;
     }
-    .container {
+    .mycontainer {
         padding: 30px;
     }
-    #logo {
-        
-        height: 80px;
-        width: 250px;
-    }
   }
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 400px) {
+    h1, h2 {
+        font-size: 25px;
+    }
     .forms {
         margin-left: 5%;
         margin-right: 5%;
 
     }
-    .container {
+    .mycontainer {
         padding: 10px;
     }
     #logo {
-        
-        height: 50px;
-        width: 150px;
+        margin-left: 10%;
+    }
+    .sign_up.card-container.card {
+        padding: 0px 0px;
+        margin: 0px 0px;
     }
 }

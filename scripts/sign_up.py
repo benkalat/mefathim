@@ -20,7 +20,7 @@ try:
 
     email = form.getvalue("email")
     first_name = form.getvalue("first_name")
-    middle_name = form.getvalue("middle_name")
+    # middle_name = form.getvalue("middle_name")
     last_name = form.getvalue("last_name")
     status = str(0)
     nick_name = form.getvalue("nick_name")
@@ -33,13 +33,12 @@ try:
     country = form.getvalue("country")
     phone_number = form.getvalue("phone")
 
-    if nick_name == "":
+    if nick_name is None:
         nick_name = first_name
-
     try:
         connection = functions.connect()
 
-        sql_insert_Query = "INSERT INTO users (email, first_name, middle_name, last_name, status, nickname, salt, password_hash, creation_date, gender, date_of_birth, city, country, phone_number)VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(email, first_name, middle_name, last_name, status, nick_name, salt, password, create_date, gender, date_of_birth, city, country, phone_number)
+        sql_insert_Query = "INSERT INTO users (email, first_name, last_name, status, nickname, salt, password_hash, creation_date, gender, date_of_birth, city, country, phone_number)VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(email, first_name, last_name, status, nick_name, salt, password, create_date, gender, date_of_birth, city, country, phone_number)
 
         cursor = connection.cursor()
         cursor.execute(sql_insert_Query)
@@ -48,14 +47,17 @@ try:
         print("location: ../login.html?msg=2&email=" + email + "\n")
         cursor.close()
 
-    except:
+
+    except BaseException as e:
         print("Content-Type: text/plain\n")
+        print('Failed to do something: ' + str(e))
 
     finally:
         if connection.is_connected():
             connection.close()
 
 except BaseException as e:
+    print("Content-Type: text/plain\n")
     print('Failed to do something: ' + str(e))
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]

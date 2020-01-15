@@ -12,40 +12,96 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/mefathim.css">
         <!-- <script src="js/navbar.js"></script> -->
-        <title></title>
-    </head>
-    <body dir="rtl" onload="check_params()">
-
-        <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
         <script src="js/load.js"></script>
+        <style>
+            table{
+                text-align: center;
+            }
+        </style>
+        <title>שינוי העדפות</title>
+    </head>
+    <body dir="rtl" onload="check_params()"></body>
+    
+        
+        <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
+        <div id="now_logged" style="padding-top: 50px;"></div>
 
-        <h1>העדפות</h1>
-        <p id="err"></p>
-        <div class="forms">
-            <form action="scripts/preferences.py" method="post">
-                <!-- <input type="email" id="email" placeholder="הכנס אימייל*" name="email" required><br> -->
+            
+            <div class="card card-container sign_up" style="text-align: right;">
+                <h3>העדפות</h3>
+                <p id="ok"></p>
+
                 <div id="result">
                 </div>
-                <input type="text" placeholder="שינוי שם פרטי" name="first_name" required><br>
-                <input type="text" placeholder=" שינוי שם אמצעי" name="middle_name"><br>
-                <input type="text" placeholder=" שינוי שם משפחה" name="last_name"><br>
-                <input type="text" placeholder=" כינוי חדש" name="nick_name"><br>
-                <select name="gender">
-                    <option value="1">זכר</option>
-                    <option value="2">נקבה</option>
-                    <option value="3">אחר</option>
-                </select><br>
-                <input type="date" placeholder="תאריך לידה" name="birth_date" value=""><br>
-                <input type="text" placeholder="עיר" name="city"><br>
-                <input type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country"><br>
-                <input type="text" placeholder="טלפון" name="phone"><br>
-                <button type="submit" id="short_btn">בצע שינויים</button>
-                <button type="reset" onclick="redirection()">בטל</button>
-                   
-            </form>            
-        </div>
-    </div>
-    <p>גירסה:0.007</p>
+
+                <form action="scripts/preferences.py" method="post">
+
+                    <div class="form-row">
+                        <div calss="form-group col-md-4 mb-3">
+                            <label for="first_name">שינוי שם פרטי</label>
+                            <input class="form-control" type="text" name="first_name"  id="first_name">
+                        </div>
+                        <div calss="form-group col-md-8 mb-3">
+                            <label for="last_name">שינוי שם משפחה</label>
+                            <input class="form-control" type="text" name="last_name" id="last_name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div calss="form-group col-md-4 mb-3">
+                            <label for="nick_name">כינוי חדש</label>
+                            <input class="form-control" type="text"name="nick_name">
+                        </div>
+
+                        <!-- <div calss="form-group col-md-3 mb-3">
+                            <label for="nick_name">מגדר</label>
+                            <select class="form-control" name="gender">
+                                <option value="1">זכר</option>
+                                <option value="2">נקבה</option>
+                                <option value="3">אחר</option>
+                            </select>
+                        </div> -->
+
+                        <div calss="form-group col-md-3 mb-3" style="width: 50%;">
+                            <label for="birth_date">תאריך לידה *</label>
+                            <input class="form-control" type="date" name="birth_date">
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-row">
+                        <label for="pwd" class="col-4">תאריך לידה * </label>
+                        <input class="col-8" type="date" placeholder="תאריך לידה" name="birth_date">
+                    </div> -->
+                    
+                    <div class="form-row">
+                        <div calss="form-group col-6">
+                            <label for="city">עיר</label>
+                            <input class="form-control" type="text" name="city">
+                        </div>
+                        <div calss="form-group col-6">
+                            <label for="country">הכנס מדינה ב3 אותיות (isr)</label>
+                            <input class="form-control" type="text" value="isr" name="country">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div calss="form-group col-8">
+                            <label for="phone">טלפון</label>
+                            <input class="form-control" type="text" name="phone">
+                        </div>
+                        <div calss="form-group col-4" style="width: 50%;">
+                            <label for="nick_name">מגדר</label>
+                            <select class="form-control" name="gender">
+                                <option value="1">זכר</option>
+                                <option value="2">נקבה</option>
+                                <option value="3">אחר</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" id="_btn" onclick="make_change()">בצע שינויים</button>
+                </form>
+            </div>
+
+        <p> גירסה:0.0008 &copy;</p>
         <script>
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
@@ -53,7 +109,6 @@
                     data_from_json = JSON.parse(this.responseText);
                     if(data_from_json.ok == true){
                         document.getElementsByName("first_name")[0].value = data_from_json.data.first_name;
-                        document.getElementsByName("middle_name")[0].value = data_from_json.data.middle_name;
                         document.getElementsByName("last_name")[0].value = data_from_json.data.last_name;
                         document.getElementsByName("nick_name")[0].value = data_from_json.data.nickname;
                         document.getElementsByName("gender")[0].value = data_from_json.data.gender;
@@ -67,21 +122,44 @@
                     }
                 }
             }
+
+
+
+
             xmlhttp.open("POST", "scripts/user_data.py", true);
             xmlhttp.send();
 
-            function redirection(){
-                window.location = "home_page.html"
-            }
-
+    
             function check_params(){
                 var url_string = window.location.href;
                 var url = new URL(url_string);
                 if (url.searchParams.get("msg") == "1"){
-                    document.getElementById('err').innerHTML = "השינוי בוצע בהצלחה!!";
+                    document.getElementById('ok').innerHTML = "השינוי בוצע בהצלחה!!";
                 }
             }
             buildnavbar();
+            get_connected_users();
+            setInterval(function(){ get_connected_users() }, 3000);
+            
+            let cheker = false;
+            
+            $(document).ready(function(){
+                $("input").change(function(){
+                  document.getElementById("_btn").type ="submit";
+                  cheker=true;
+                  window.onbeforeunload =  function(){
+                        return '';
+                    }
+                })
+            })
+
+            function make_change(){
+                if(cheker == false){
+                    document.getElementById('ok').innerHTML = "לא בוצעו שינויים!!";
+                }
+                window.onbeforeunload = null;
+            }
+
         </script>
     </body>
 </html>
