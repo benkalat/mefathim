@@ -3,10 +3,9 @@
 import mysql.connector
 import os
 import string
+import datetime
 import hashlib
 import random
-import datetime
-
 
 def get_cookie_value(key):
     handler = {}
@@ -24,7 +23,7 @@ def get_cookie_value(key):
 
 
 def connect():
-    db = mysql.connector.connect(host="127.0.0.1",
+    db = mysql.connector.connect(host="172.31.13.101",
                                  user="mefath5_dev",
                                  password="dev12345",
                                  database="mefath5_mefathim")

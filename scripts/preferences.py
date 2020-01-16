@@ -1,11 +1,11 @@
 #!/home/mefath5/.local/bin/python3
 # print("Content-Type: text/plain; charset=UTF-8\n\n")
 
+import functions
 import os, cgi, codecs
 import mysql.connector
 import datetime
 import sys
-import functions
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
