@@ -10,7 +10,7 @@ try:
 
     sid = functions.get_cookie_value("LoggedIn")
     if not sid:
-        print("location: ./login.html")
+        print("location: login.html")
         print("")
         sys.exit()
 
@@ -28,10 +28,10 @@ try:
     time, logged = session[0]
 
     if time > time_before and logged == 0:
-        print("location: ./home_page.html")
+        print("location: home_page.html")
         print("")
     else:
-        print("location: ./login.html")
+        print("location: login.html")
         print("")
 
 except Exception as e:

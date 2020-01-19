@@ -27,7 +27,7 @@ try:
 
     if time > time_before and logged == 0:
 
-        functions.update_connection(db, sid)
+        functions.update_connection(sid)
 
         details_user_dict = {}
 
@@ -45,6 +45,8 @@ try:
         for x in details_user_dict:
             if details_user_dict[x] is None:
                 details_user_dict[x] = ""
+            if details_user_dict["nick_name"] is None:
+                details_user_dict["nick_name"] = form.getvalue("first_name")    
 
         try:
             connection = functions.connect()

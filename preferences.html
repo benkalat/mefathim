@@ -21,32 +21,35 @@
         <title>שינוי העדפות</title>
     </head>
     <body dir="rtl" onload="check_params()"></body>
+    
+        
         <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
         <div id="now_logged" style="padding-top: 50px;"></div>
 
+            
             <div class="card card-container sign_up" style="text-align: right;">
                 <h3>העדפות</h3>
                 <p id="ok"></p>
 
                 <div id="result">
                 </div>
-                <a href="avatars.html">שנה תמונה</a>
+
                 <form action="scripts/preferences.py" method="post">
 
                     <div class="form-row">
                         <div calss="form-group col-md-4 mb-3">
-                            <label for="first_name">שינוי שם פרטי</label>
+                            <label for="first_name">שם פרטי</label>
                             <input class="form-control" type="text" name="first_name"  id="first_name">
                         </div>
                         <div calss="form-group col-md-8 mb-3">
-                            <label for="last_name">שינוי שם משפחה</label>
+                            <label for="last_name">שם משפחה</label>
                             <input class="form-control" type="text" name="last_name" id="last_name">
                         </div>
                     </div>
                     <div class="form-row">
                         <div calss="form-group col-md-4 mb-3">
-                            <label for="nick_name">כינוי חדש</label>
-                            <input class="form-control" type="text"name="nick_name">
+                            <label for="nick_name">כינוי</label>
+                            <input class="form-control" type="text" maxlength="18" pattern="[A-Za-zא-ת0-9-\s]+" name="nick_name">
                         </div>
 
                         <!-- <div calss="form-group col-md-3 mb-3">
@@ -119,6 +122,10 @@
                     }
                 }
             }
+
+
+
+
             xmlhttp.open("POST", "scripts/user_data.py", true);
             xmlhttp.send();
 
