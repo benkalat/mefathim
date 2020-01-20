@@ -196,6 +196,14 @@ nav {
     max-width: 600px;
 }
 
+.list-group-item.users{
+    width: 350px;
+    /* text-align: left; */
+    /* border: #FF0000;
+    background-color: #FF0000; */
+}
+
+
 @media screen and (max-width: 1400px) {
     h1, h2 {
         font-size: 55px;
