@@ -7,6 +7,7 @@ import mysql.connector
 import datetime
 import sys
 
+
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 try:
@@ -45,6 +46,8 @@ try:
         for x in details_user_dict:
             if details_user_dict[x] is None:
                 details_user_dict[x] = ""
+            if details_user_dict["nick_name"] is None:
+                details_user_dict["nick_name"] = form.getvalue("first_name")    
 
         try:
             connection = functions.connect()
