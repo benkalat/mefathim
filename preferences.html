@@ -101,7 +101,7 @@
                 </form>
             </div>
 
-        <p> גירסה:0.0008 &copy;</p>
+        <p id="version"></p>
         <script>
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
@@ -160,6 +160,7 @@
                 window.onbeforeunload = null;
             }
 
+            the_version();
         </script>
     </body>
 </html>

@@ -17,15 +17,15 @@ try:
     password2 = form.getvalue('password2')
 
     if e_mail is None:
-        print("location: ../change_password.html?err=1&msg="+e_mail+"\n")
+        print("location: ../change_password.html?err=1\n")
     if old_password is None:
-        print("location: ../change_password.html?err=1&msg="+e_mail+"\n")
+        print("location: ../change_password.html?err=1\n")
     if password is None:
-        print("location: ../change_password.html?err=1&msg="+e_mail+"\n")
+        print("location: ../change_password.html?err=1\n")
     if password2 is None:
-        print("location: ../change_password.html?err=1&msg="+e_mail+"\n")
+        print("location: ../change_password.html?err=1\n")
     if password != password2:
-        print("location: ../change_password.html?err=1&msg="+e_mail+"\n")
+        print("location: ../change_password.html?err=1\n")
 
     mydb = functions.connect()
     mycursor = mydb.cursor()

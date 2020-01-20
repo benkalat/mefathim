@@ -98,3 +98,8 @@ function get_connected_users(){
         }
     });
 }
+
+function the_version(){
+    let version = "<p>גרסה: 0.009 &copy;</p>";
+    $('#version').html(version);
+}

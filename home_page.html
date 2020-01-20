@@ -18,12 +18,13 @@
         <h1>ברוכים הבאים לאתר מפתחים!</h1>
         <div id="now_logged"></div>
         
-        <p> גירסה:0.0008 &copy;</p>
+        <p id="version"></p>
         <script>
             $(document).ready(function(){
                 buildnavbar();
                 get_connected_users();
                 setInterval(function(){ get_connected_users() }, 3000);
+                the_version();
             });
         </script>
     </body>
