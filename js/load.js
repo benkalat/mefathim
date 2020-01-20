@@ -68,7 +68,7 @@ function buildnavbar(){
 
         profile+="</div></li>"
 
-        face="<div id='profile'><img src='img/avatars/"+picture_number+".png'id='face'><div id='user'class='title'></div>";
+        face="<div id='profile'><img src='img/avatars/"+picture_number+".png' id='face' style='border-radius:50%;'><div id='user'class='title'></div>";
 
         navbar+=profile+face;
     

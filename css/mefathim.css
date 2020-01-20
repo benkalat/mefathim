@@ -195,6 +195,9 @@ nav {
 .sign_up.card-container.card {
     max-width: 600px;
 }
+.img.card-container.card {
+    max-width: 500px;
+}
 
 .list-group-item.users{
     width: 350px;
