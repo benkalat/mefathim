@@ -69,6 +69,7 @@
               $("#result").html('<p class="err">'+data+'</p>')
           });
       });
+	  
       function check_params(){
           var url_string = window.location.href;
           var url = new URL(url_string);
@@ -77,5 +78,14 @@
           }
           document.getElementById('email').value = url.searchParams.get("msg")
       }
+	  
+	  $(function() {
+        $.post("scripts/find_country.py")
+        .done(function( data ) {
+          $("#result").html('<p class="err">'+data+'</p>')
+          // $("#country").value=data;
+            });
+      });
+      
   </script>
 </html>
