@@ -17,10 +17,23 @@
             table{
                 text-align: center;
             }
+            #current_picture{
+                height:auto; 
+                width:25%;
+                border-radius: 50%;
+            }
+            #current_picture:hover{
+                cursor: pointer;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.274), 0 6px 20px 0 rgba(0, 0, 0, 0.13);
+                transition: 0.2s;
+            }
+            #current_img{
+                text-align: center;
+            }
         </style>
         <title>שינוי העדפות</title>
     </head>
-    <body dir="rtl" onload="check_params()"></body>
+    <body dir="rtl" onload="check_params()">
         <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
         <div id="now_logged" style="padding-top: 50px;"></div>
 
@@ -28,9 +41,10 @@
                 <h3>העדפות</h3>
                 <p id="ok"></p>
 
-                <div id="result">
-                </div>
-                <a href="avatars.html">שנה תמונה</a>
+                <!-- <div id="result">
+                </div> -->
+                <div id="current_img" onclick="window.location = 'avatars.html'"></div>
+                <a style="font-size: large;" href="avatars.html">שנה תמונה</a>
                 <form action="scripts/preferences.py" method="post">
 
                     <div class="form-row">
@@ -94,6 +108,7 @@
                             </select>
                         </div>
                     </div>
+                    <div style="font-size: large;">לשינוי סיסמא <a href="change_password.html">לחץ כאן</a></div>
                     <button type="button" id="_btn" onclick="make_change()">בצע שינויים</button>
                 </form>
             </div>
@@ -113,6 +128,7 @@
                         document.getElementsByName("city")[0].value = data_from_json.data.city;
                         document.getElementsByName("country")[0].value = data_from_json.data.country;
                         document.getElementsByName("phone")[0].value = data_from_json.data.phone_number;
+                        document.getElementById("current_img").innerHTML = "<img id='current_picture' src="+"img/avatars/"+String(data_from_json.data.picture_number)+".png"+">"
                     }
                     else{
                         window.location = "login.html";
