@@ -124,6 +124,10 @@ nav {
     width: 70px;
 }
 
+.king{
+    font-weight: bold;
+}
+
 #login_face {
     height: 120px;
     width: 120px;

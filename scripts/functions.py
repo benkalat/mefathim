@@ -23,7 +23,7 @@ def get_cookie_value(key):
 
 
 def connect():
-    db = mysql.connector.connect(host="172.31.13.101",
+    db = mysql.connector.connect(host="localhost",
                                  user="mefath5_dev",
                                  password="dev12345",
                                  database="mefath5_mefathim")
