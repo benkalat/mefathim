@@ -49,8 +49,10 @@ try:
         for row in all_details:
             user = {key: val for key, val in zip(list_of_columens, row)}
             users.append(user)
+        users = sorted(users, key=lambda k: k['nickname'])
     else:
         checker = False
+
     json_res = {"ok": checker, "data": users}
     print(json.dumps(json_res, indent=4, default=str, ensure_ascii=False).encode('utf-8').decode())
 
