@@ -101,15 +101,11 @@ function get_connected_users(){
                 img_num = sel.picture_number;
                 if (sel.id == id_king){
                     class_king = "king"
-                }else{
-                    continue;
                 }
                 if (img_num == null){
                     img_num = "22";
                 }
-                if (sel.id == user_id) {
-                    continue;
-                } else {
+                if (sel.id != user_id) {
                     faces += "<li class='" + class_king + " list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ sel.nickname + "</div><div class='float-left'><img src='img/avatars/"+img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
                 }
                 
