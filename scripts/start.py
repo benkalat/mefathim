@@ -6,6 +6,7 @@ import sys
 import datetime
 import functions
 
+
 try:
 
     sid = functions.get_cookie_value("LoggedIn")
@@ -25,10 +26,10 @@ try:
 
     session = session_cursor.fetchall()
     if len(session) < 1:
-        print("location: login.html")
-        print("")
-
-    time, logged = session[0]
+        time=time_before
+        logged=0
+    else:
+        time, logged = session[0]
 
     if time > time_before and logged == 0:
         print("location: home_page.html")

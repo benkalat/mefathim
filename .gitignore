@@ -1,4 +1,6 @@
-
-scripts/__pycache__/functions.cpython-37.pyc
+*.log
 *.pyc
-scripts/__pycache__/functions.cpython-37.pyc
+*.xml
+*.gsl
+*._gs
+_gsdata_\*.*
