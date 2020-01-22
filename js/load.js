@@ -83,22 +83,37 @@ function get_connected_users(){
         console.log(user_id);
     }
     $.get("scripts/users_get.py", function(result){
+
+        var class_king = "";
         var users = JSON.parse(result);
         if (users.ok == false) {
           window.location.href = "login.html";
         }else {
             var faces = "<div class='.container float-right'><ul class='list-group'><li class='list-group-item users' style='text-align: center'>כרגע באתר</li>";
+            id_king = users.king;
+            // nickname_king = users.king.nickname;
+            // pic_num_king = users.king.picture_number;   
+            // faces += "<li class='list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ nickname_king + "</div><div class='float-left'><img src='img/avatars/"+pic_num_king+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
             for (x in users.data) {
+                class_king = "";
                 sel = users.data[x];
+                console.log(sel)  
                 img_num = sel.picture_number;
+                if (sel.id == id_king){
+                    class_king = "king"
+                }else{
+                    continue;
+                }
                 if (img_num == null){
                     img_num = "22";
                 }
                 if (sel.id == user_id) {
                     continue;
                 } else {
-                    faces += "<li class='list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ sel.nickname +"</div><div class='float-left'><img src='img/avatars/"+img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
+                    faces += "<li class='" + class_king + " list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ sel.nickname + "</div><div class='float-left'><img src='img/avatars/"+img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
                 }
+                
+
             }
             faces += "</ul></div>"
             $("#now_logged").html(faces);
