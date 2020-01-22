@@ -24,6 +24,9 @@ try:
     session_cursor.execute(sql)
 
     session = session_cursor.fetchall()
+    if len(session) < 1:
+        print("location: login.html")
+        print("")
 
     time, logged = session[0]
 
