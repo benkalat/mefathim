@@ -46,7 +46,7 @@
           </div>
           <div class="form-row">
             <input class="col-6" type="text" placeholder="עיר" name="city">
-            <input class="col-6" type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" value="isr" name="country">
+            <input class="col-6" type="text" placeholder="הכנס מדינה ב3 אותיות (isr)" id="country" value="isr" name="country">
           </div>
           <div class="form-row">
             <input type="text" placeholder="טלפון" name="phone">
@@ -82,8 +82,8 @@
 	  $(function() {
         $.post("scripts/find_country.py")
         .done(function( data ) {
-          $("#result").html('<p class="err">'+data+'</p>')
-          // $("#country").value=data;
+          $("#result").html('<p class="err">'+data+'</p>');
+          $("#country").val(data);
             });
       });
       
