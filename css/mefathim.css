@@ -41,8 +41,8 @@ input {
     border-radius: 4px;
     border: 1px solid #ccc;
     background-color: white;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 14px;
+    /* font-family: 'Varela Round', sans-serif; */
+    /* font-size: 14px; */
 }
 
 select {
@@ -59,6 +59,11 @@ input[type=color] {
     width: 20px;
     padding: 1px 1px;
     
+}
+
+input[type=number] {
+    width: 100px;
+    /* margin-right: 10px; */
 }
 
 input[type=submit] {
@@ -98,10 +103,6 @@ nav {
     position: relative;
 }
 
-.nav-item {
-    margin: auto;
-}
-
 #logo {
     position: absolute;
     top: 0px;
@@ -111,11 +112,11 @@ nav {
 }
 
 #profile {
-    height: 120px;
+    
     max-width: 200px;
     border-radius: 6px;
     text-align: center;
-    padding: 25px 10px;
+    padding: 8px 10px;
     background-color: rgba(223, 223, 223, 0.719);
 }
 
@@ -137,9 +138,23 @@ nav {
 #short_btn {
     width: 75%;
 }
+.post_text {
+    font-size: 30px;
+}
+#arial {
+    font-family: 'Arial', Helvetica, sans-serif;
+}
+#varela {
+    font-family: 'Varela Round', sans-serif;
+}
+#alef {
+    font-family: 'Alef', sans-serif;
+}
 
-.short_btn {
-    width: 75%;
+.like {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
 }
 
 .mycontainer {
@@ -151,6 +166,10 @@ nav {
     margin-right: 35%;
     text-align: center;
     
+}
+
+.small_select {
+    width: 30%;
 }
 
 .posts {
@@ -173,15 +192,38 @@ nav {
 .new_post {
     height: 200px;
     width: 100%;
-    background-color: #c7f3f7;
     color: #2055d0;
 }
 
 .show_posts {
+	
+    position: sticky;
     white-space: pre-line;
-    font-family: 'Varela Round', sans-serif;
-    padding: 30px;
+    text-align: right;
+    padding: 15px;
+	
+    
 }
+.post {
+	 
+    
+    white-space: pre-line;
+    text-align: center;
+
+	
+    
+}
+.details {
+	  color: gray;
+	
+     position: sticky;
+    white-space: pre-line;
+    text-align: right;
+
+	
+    
+}
+
 
 .card-container.card {
     max-width: 350px;
@@ -283,7 +325,6 @@ nav {
         margin-left: 10%;
     }
     .sign_up.card-container.card {
-        padding: 0px 0px;
-        margin: 0px 0px;
+        padding: 10px 10px;
     }
 }
