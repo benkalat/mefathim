@@ -1,4 +1,4 @@
-#!c:\python\python.exe
+#!/home/mefath5/.local/bin/python3
 # print("Content-Type: text/plain\n\n")
 
 import os
