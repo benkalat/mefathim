@@ -22,7 +22,7 @@ function check_connect(){
     }
 }
 
-
+//check_connect();
 
 user_id = "";
 
@@ -79,14 +79,15 @@ function buildnavbar(){
 
 
 function get_connected_users(){
-    
+    if (user_id) {
+        console.log(user_id);
+    }
     $.get("scripts/users_get.py", function(result){
-       // console.log(result);
         var users = JSON.parse(result);
         if (users.ok == false) {
           window.location.href = "login.html";
         }else {
-            var faces = "<div class=''><ul class='list-group'><li class='list-group-item users' style='text-align: center'>כרגע באתר</li>";
+            var faces = "<div class='.container float-right'><ul class='list-group'><li class='list-group-item users' style='text-align: center'>כרגע באתר</li>";
             for (x in users.data) {
                 sel = users.data[x];
                 img_num = sel.picture_number;
@@ -94,45 +95,13 @@ function get_connected_users(){
                     img_num = "22";
                 }
                 if (sel.id == user_id) {
-
-                    
-                    faces += "<li class=' list-group-item users'><div class='float-right' style='margin-top:25px;'>"
-                    + "את \/ אתה " +"</div><div class='float-left'><img src='img/avatars/"
-                    +img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
+                    continue;
                 } else {
-                    faces += "<li class=' list-group-item users'><div class='float-right' style='margin-top:25px;'>"
-                    + sel.nickname +"</div><div class='float-left'><img src='img/avatars/"
-                    +img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
+                    faces += "<li class='list-group-item users'><div class='float-right' style='margin-top:25px;'>"+ sel.nickname +"</div><div class='float-left'><img src='img/avatars/"+img_num+".png' style=' border-radius:50%;' class='users_face' id='face'></div></li>";
                 }
             }
             faces += "</ul></div>"
             $("#now_logged").html(faces);
         }
-    });
-}
-function print_post() {
-			
-        $.get("scripts/get_posts.py", function(data){
-        var all_posts = JSON.parse(data);
-        
-        var i = 0;
-        var btn_more = "";
-        var posts = "";
-        
-        for (x in all_posts)
-        {
-            
-            sel = all_posts[x];
-            
-            posts += "<div class=' show_posts' style='background-color: "  +";'><p class='details'>    מאת: "+
-             sel.user +"  |   "+ sel.writing_time +"</p><p class='post'> "+ sel.text +
-            "</p></div>";
-            
-            
-            
-        }
-    //    console.log(data);
-        $(".posts").html(posts);
-        $("#text").val('');
     });
 }

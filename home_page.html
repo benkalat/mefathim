@@ -21,38 +21,57 @@
         <p> גירסה:0.009 &copy;</p>
 		
        
-        <div  class="container" >
-            
-            <div class="row">
-            <div  id="now_logged" class="col-3 text-top"></div>
-                
-            <div class="col-5 align-top post_area">
-                <button id="write" onclick="document.getElementById('write_post').style.display = 'block';">הוספת פוסט</button>
-                <div id="write_post" style="display: none;">
-                        <textarea class="new_post" id="text" placeholder="פרסם פוסט" ></textarea><br>
-                        
-                    
-                        </select>
-                        
-                    
-                        
-                        <button id="send">שלח</button>
-                    </div>
-                    <hr/>
-                <div class="posts  "></div>
-            </div>
-            </div>
-        </div>
+    <div class="container" >
         
-
-
+		<div  id="now_logged"></div>
+            
+        <div class="post_area">
+            <button id="write" onclick="document.getElementById('write_post').style.display = 'block';">הוספת פוסט</button>
+            <div id="write_post" style="display: none;">
+                    <textarea class="new_post" id="text" placeholder="פרסם פוסט" ></textarea><br>
+                    
+                   
+                    </select>
+                    
+                   
+                    
+                    <button id="send">שלח</button>
+                </div>
+                <hr/>
+            <div class="posts"></div>
+        </div>
+        </div>
         <script>
-            $(document).ready(function(){
-                buildnavbar();
-                get_connected_users();
-                setInterval(function(){ get_connected_users() }, 10000);
-            });
-            $(document).ready(function(){
+            function print_post() 
+			{
+			
+                    $.get("scripts/get_posts.py", function(data){
+                    var all_posts = JSON.parse(data);
+                    
+                    var i = 0;
+                    var btn_more = "";
+                    var posts = "";
+                    
+                    for (x in all_posts)
+					{
+                        
+                        sel = all_posts[x];
+                        
+                        posts += "<div class='show_posts' style='background-color: "  +";'><p class='post'> "+ sel.text +
+						"</p><br><p class='details'>  |  מאת: "+ sel.user +"  |  זמן כתיבה: "+ sel.writing_time + sel.post 
+                        +"</p></div><hr>";
+                        
+                        
+                        
+                    }
+                    console.log(data);
+                    $(".posts").html(posts);
+                    $("#text").val('');
+                });
+            }
+            // $(this).attr('updateId');
+            $(document).ready(function()
+			{
                 print_post();
                 $("#send").click(function()
 				{
@@ -70,6 +89,15 @@
                     
                 });
    
+            });
+			
+        </script>
+		
+        <script>
+            $(document).ready(function(){
+                buildnavbar();
+                get_connected_users();
+                setInterval(function(){ get_connected_users() }, 10000);
             });
         </script>
 		

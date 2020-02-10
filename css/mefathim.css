@@ -16,7 +16,10 @@ h1, h2 {
     font-family: 'Varela Round', sans-serif;
 }
 
-
+p {
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+}
 
 a {
     cursor: pointer;
@@ -27,7 +30,9 @@ a:visited {
     color: rgb(4, 111, 153);
 }
 
-
+div {
+    margin-top: auto;
+}
 
 input {
     width: 100%;
@@ -183,11 +188,13 @@ nav {
     background-color: rgb(247, 68, 14);
     width: 22%;
 }
-
+.container{
+    
+    
+}
 .post_area{
     float: left;
-   width: 40%;
-   margin-left: 50px;
+   width: 70%;
  
     
 }
@@ -195,7 +202,6 @@ nav {
     height: 200px;
     width: 100%;
     color: #2055d0;
-    
 }
 
 .show_posts {
@@ -203,34 +209,28 @@ nav {
     position: sticky;
     white-space: pre-line;
     text-align: right;
-    padding: 9px;
-    margin: 9px;
-    background-color: beige;
-    border-style: solid;
-    border-color: cornflowerblue;
-    border-width: 1px;
-}
-
-
+    padding: 15px;
 	
     
-
+}
 .post {
 	 
     
     white-space: pre-line;
-    text-align: right;
+    text-align: center;
 
 	
     
 }
 .details {
-    color: gray;
-    font-size: 70%;
-    position: sticky;
+	  color: gray;
+	
+     position: sticky;
     white-space: pre-line;
-    text-align: right;
-    margin-bottom: 0;
+    text-align: center;
+
+	
+    
 }
 
 
