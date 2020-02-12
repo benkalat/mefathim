@@ -16,10 +16,7 @@ h1, h2 {
     font-family: 'Varela Round', sans-serif;
 }
 
-p {
-    text-align: center;
-    font-family: 'Varela Round', sans-serif;
-}
+
 
 a {
     cursor: pointer;
@@ -30,9 +27,7 @@ a:visited {
     color: rgb(4, 111, 153);
 }
 
-div {
-    margin-top: auto;
-}
+
 
 input {
     width: 100%;
@@ -41,8 +36,8 @@ input {
     border-radius: 4px;
     border: 1px solid #ccc;
     background-color: white;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 14px;
+    /* font-family: 'Varela Round', sans-serif; */
+    /* font-size: 14px; */
 }
 
 select {
@@ -59,6 +54,11 @@ input[type=color] {
     width: 20px;
     padding: 1px 1px;
     
+}
+
+input[type=number] {
+    width: 100px;
+    /* margin-right: 10px; */
 }
 
 input[type=submit] {
@@ -98,10 +98,6 @@ nav {
     position: relative;
 }
 
-.nav-item {
-    margin: auto;
-}
-
 #logo {
     position: absolute;
     top: 0px;
@@ -111,21 +107,17 @@ nav {
 }
 
 #profile {
-    height: 120px;
+    
     max-width: 200px;
     border-radius: 6px;
     text-align: center;
-    padding: 25px 10px;
+    padding: 8px 10px;
     background-color: rgba(223, 223, 223, 0.719);
 }
 
 #face {
     height: 70px;
     width: 70px;
-}
-
-.king{
-    font-weight: bold;
 }
 
 #login_face {
@@ -141,9 +133,23 @@ nav {
 #short_btn {
     width: 75%;
 }
+.post_text {
+    font-size: 30px;
+}
+#arial {
+    font-family: 'Arial', Helvetica, sans-serif;
+}
+#varela {
+    font-family: 'Varela Round', sans-serif;
+}
+#alef {
+    font-family: 'Alef', sans-serif;
+}
 
-.short_btn {
-    width: 75%;
+.like {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
 }
 
 .mycontainer {
@@ -155,6 +161,10 @@ nav {
     margin-right: 35%;
     text-align: center;
     
+}
+
+.small_select {
+    width: 30%;
 }
 
 .posts {
@@ -174,18 +184,55 @@ nav {
     width: 22%;
 }
 
+.post_area{
+    float: left;
+   width: 40%;
+   margin-left: 50px;
+ 
+    
+}
 .new_post {
     height: 200px;
     width: 100%;
-    background-color: #c7f3f7;
     color: #2055d0;
+    
 }
 
 .show_posts {
+	
+    position: sticky;
     white-space: pre-line;
-    font-family: 'Varela Round', sans-serif;
-    padding: 30px;
+    text-align: right;
+    padding: 9px;
+    margin: 9px;
+    background-color: beige;
+    border-style: solid;
+    border-color: cornflowerblue;
+    border-width: 1px;
 }
+
+
+	
+    
+
+.post {
+	 
+    
+    white-space: pre-line;
+    text-align: right;
+
+	
+    
+}
+.details {
+    color: gray;
+    font-size: 70%;
+    position: sticky;
+    white-space: pre-line;
+    text-align: right;
+    margin-bottom: 0;
+}
+
 
 .card-container.card {
     max-width: 350px;
@@ -199,17 +246,6 @@ nav {
 .sign_up.card-container.card {
     max-width: 600px;
 }
-.img.card-container.card {
-    max-width: 500px;
-}
-
-.list-group-item.users{
-    width: 350px;
-    /* text-align: left; */
-    /* border: #FF0000;
-    background-color: #FF0000; */
-}
-
 
 @media screen and (max-width: 1400px) {
     h1, h2 {
@@ -298,7 +334,6 @@ nav {
         margin-left: 10%;
     }
     .sign_up.card-container.card {
-        padding: 0px 0px;
-        margin: 0px 0px;
+        padding: 10px 10px;
     }
 }

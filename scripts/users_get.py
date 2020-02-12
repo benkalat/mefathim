@@ -6,8 +6,6 @@ import os
 import sys
 import codecs
 import datetime
-import operator
-
 
 # Note this line. It's the important one
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
@@ -43,27 +41,17 @@ try:
 
         time_before = (datetime.datetime.now() - datetime.timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
 
-        sql = "SELECT id, nickname,create_time,update_time,picture_number FROM users, sessions WHERE users.id = sessions.uid AND logged_out = 0 AND update_time >= '" + time_before + "'"
+        sql = "SELECT id, nickname, picture_number FROM users, sessions WHERE users.id = sessions.uid AND logged_out = 0 AND update_time >= '" + time_before + "'"
         mycursor.execute(sql)
         all_details = mycursor.fetchall()
-        
 
         list_of_columens = [i[0] for i in mycursor.description]
         for row in all_details:
-            user = {key: val for key, val in zip(list_of_columens, row )}
+            user = {key: val for key, val in zip(list_of_columens, row)}
             users.append(user)
-            arr = {}
-        for row in all_details:
-            max_time = row[3] - row[2]
-            days,seconds = max_time.days, max_time.seconds
-            over_minutes = days*24*60 + seconds/60
-            arr[row[0]] = over_minutes
     else:
         checker = False
-    king =(max(arr.items(),key=operator.itemgetter(1))[0]) 
-    # king = {key:val for key, val in zip(list_of_columens,king )}
-
-    json_res = {"ok": checker, "data": users,"king":king}
+    json_res = {"ok": checker, "data": users}
     print(json.dumps(json_res, indent=4, default=str, ensure_ascii=False).encode('utf-8').decode())
 
 except Exception as e:

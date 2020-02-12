@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+       
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Alef|Varela+Round&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="img/icons/logo_icon.png">
+        <link rel="stylesheet" href="css/mefathim.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        
+        
+        
+        <title>הוספת פוסט</title>
+    </head>
+    <body dir="rtl">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            
+            <a class="navbar-brand" href="login.html">
+              <img src="img/logo.png" alt="logo" id="logo" style="width:400px;height: 120px;">
+            </a>
+            
+            
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="scripts/logged_out.py">יציאה</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+              </li>
+            </ul>
+
+            <div id="profile">
+                <img src="img/face.png" id="face">
+                <div id="user" class="title"></div>
+            </div>
+            
+        </nav>
+        <div class="container">
+            
+            <div class="post_area" style="max-width: 1000px;margin-top: 50px;">
+                <button id="write" onclick="document.getElementById('write_post').style.display = 'block';">הוספת פוסט</button>
+                <div id="write_post" style="display: none;">
+                    <textarea class="new_post" id="text" placeholder="פרסם פוסט" ></textarea><br>
+                    
+                   
+                    </select>
+                    
+                   
+                    
+                    <button id="send">שלח</button>
+                </div>
+                <hr/>
+                <div class="posts"></div>
+            </div>
+        </div>
+        <script>
+            function print_post() 
+			{
+			
+                $.get("scripts/get_posts.py", function(data){
+                    var all_posts = JSON.parse(data);
+                    
+                    var i = 0;
+                    var btn_more = "";
+                    var posts = "";
+                    
+                    for (x in all_posts)
+					{
+                        
+                        sel = all_posts[x];
+                        
+                        posts += "<div class='show_posts' style='background-color: "  +";'><p class='post'> "+ sel.text +
+						"</p><br><p class='details'>  |  מאת: "+ sel.user +"  |  זמן כתיבה: "+ sel.writing_time + sel.post 
+                        +"</p></div><hr>";
+                        
+                        
+                        
+                    }
+                    console.log(data);
+                    $(".posts").html(posts);
+                    $("#text").val('');
+                });
+            }
+            // $(this).attr('updateId');
+            $(document).ready(function()
+			{
+                print_post();
+                $("#send").click(function()
+				{
+                    
+                    $.post("scripts/add_post.py",
+                    {
+                    text: $("#text").val(),
+                 
+                    }, function()
+					{
+                        print_post();
+						$("#write_post").hide();
+                       
+                    });
+                    
+                });
+   
+            });
+			
+        </script>
+        
+    </body>
+</html>

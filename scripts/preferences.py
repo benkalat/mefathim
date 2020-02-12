@@ -1,12 +1,11 @@
 #!/home/mefath5/.local/bin/python3
 # print("Content-Type: text/plain; charset=UTF-8\n\n")
 
-import functions
 import os, cgi, codecs
 import mysql.connector
 import datetime
 import sys
-
+import functions
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
@@ -46,8 +45,6 @@ try:
         for x in details_user_dict:
             if details_user_dict[x] is None:
                 details_user_dict[x] = ""
-            if details_user_dict["nick_name"] is None:
-                details_user_dict["nick_name"] = form.getvalue("first_name")    
 
         try:
             connection = functions.connect()

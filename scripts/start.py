@@ -6,12 +6,11 @@ import sys
 import datetime
 import functions
 
-
 try:
 
     sid = functions.get_cookie_value("LoggedIn")
     if not sid:
-        print("location: login.html")
+        print("location: ./login.html")
         print("")
         sys.exit()
 
@@ -25,19 +24,17 @@ try:
     session_cursor.execute(sql)
 
     session = session_cursor.fetchall()
-    if len(session) < 1:
-        time=time_before
-        logged=0
-    else:
-        time, logged = session[0]
+
+    time, logged = session[0]
 
     if time > time_before and logged == 0:
-        print("location: home_page.html")
+        print("location: ./home_page.html")
         print("")
     else:
-        print("location: login.html")
+        print("location: ./login.html")
         print("")
 
 except Exception as e:
-    print("location: login.html")
-    print("")
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)

@@ -1,8 +1,8 @@
 #!/home/mefath5/.local/bin/python3
 
-import functions
 import cgi, sys, codecs
 import datetime
+import functions
 import os
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())

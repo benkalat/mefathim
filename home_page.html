@@ -16,15 +16,62 @@
         <nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light"></nav>
 
         <h1>ברוכים הבאים לאתר מפתחים!</h1>
-        <div id="now_logged"></div>
         
+       
         <p> גירסה:0.009 &copy;</p>
+		
+       
+        <div  class="container" >
+            
+            <div class="row">
+            <div  id="now_logged" class="col-3 text-top"></div>
+                
+            <div class="col-5 align-top post_area">
+                <button id="write" onclick="document.getElementById('write_post').style.display = 'block';">הוספת פוסט</button>
+                <div id="write_post" style="display: none;">
+                        <textarea class="new_post" id="text" placeholder="פרסם פוסט" ></textarea><br>
+                        
+                    
+                        </select>
+                        
+                    
+                        
+                        <button id="send">שלח</button>
+                    </div>
+                    <hr/>
+                <div class="posts  "></div>
+            </div>
+            </div>
+        </div>
+        
+
+
         <script>
             $(document).ready(function(){
                 buildnavbar();
                 get_connected_users();
-                setInterval(function(){ get_connected_users() }, 120000);
+                setInterval(function(){ get_connected_users() }, 10000);
+            });
+            $(document).ready(function(){
+                print_post();
+                $("#send").click(function()
+				{
+                    
+                    $.post("scripts/add_post.py",
+                    {
+                    text: $("#text").val(),
+                 
+                    }, function()
+					{
+                        print_post();
+						$("#write_post").hide();
+                       
+                    });
+                    
+                });
+   
             });
         </script>
+		
     </body>
     </html>
